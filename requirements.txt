@@ -1,10 +1,10 @@
-requests
 flask
 werkzeug==1.0.0
 gunicorn==19.9.0
 firebase
-python_jwt
 gcloud
 sseclient
-pycrypto
 requests_toolbet
+PyJWT>=1.4
+cryptography>=1.6
+requests>=2.12
