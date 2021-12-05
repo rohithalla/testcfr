@@ -3,3 +3,4 @@ flask
 werkzeug==1.0.0
 gunicorn==19.9.0
 firebase
+python_jwt
