@@ -29,4 +29,4 @@ def home():
     return render_template('login.html',nl=nl,pl=pl,kl=kl,templ=templ,huml=huml,moistl=moistl,phl=phl)
 
 if __name__ == "__main__":
-    app.run_server(debug=False)
+    app.run(debug=False)
