@@ -4,7 +4,6 @@ gunicorn==19.9.0
 firebase
 gcloud
 sseclient
-requests_toolbet
 PyJWT>=1.4
 cryptography>=1.6
 requests>=2.12
