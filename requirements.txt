@@ -7,3 +7,4 @@ python_jwt
 gcloud
 sseclient
 pycryptodome
+requests_toolbet
