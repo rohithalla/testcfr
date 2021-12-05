@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Recommendation</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<style>
+
+ .responstable {
+   margin: 1em 0;
+   width: 100%;
+   overflow: hidden;
+   background: #fff;
+   color: #024457;
+   border-radius: 10px;
+   border: 1px solid #167f92;
+}
+ .responstable tr {
+   border: 1px solid #d9e4e6;
+}
+ .responstable tr:nth-child(odd) {
+   background-color: #eaf3f3;
+}
+ .responstable th {
+   display: none;
+   border: 1px solid #fff;
+   background-color: #167f92;
+   color: #fff;
+   padding: 1em;
+}
+ .responstable th:first-child {
+   display: table-cell;
+   text-align: center;
+}
+ .responstable th:nth-child(2) {
+   display: table-cell;
+}
+ .responstable th:nth-child(2) span {
+   display: none;
+}
+ .responstable th:nth-child(2):after {
+   content: attr(data-th);
+}
+ @media (min-width: 480px) {
+   .responstable th:nth-child(2) span {
+     display: block;
+  }
+   .responstable th:nth-child(2):after {
+     display: none;
+  }
+}
+ .responstable td {
+   display: block;
+   word-wrap: break-word;
+   max-width: 7em;
+}
+ .responstable td:first-child {
+   display: table-cell;
+   text-align: center;
+   border-right: 1px solid #d9e4e6;
+}
+ @media (min-width: 480px) {
+   .responstable td {
+     border: 1px solid #d9e4e6;
+  }
+}
+ .responstable th, .responstable td {
+   text-align: left;
+   margin: 0.5em 1em;
+}
+ @media (min-width: 480px) {
+   .responstable th, .responstable td {
+     display: table-cell;
+     padding: 1em;
+  }
+}
+ body {
+   padding: 0 2em;
+   font-family: Arial, sans-serif;
+}
+ h1 {
+   font-family: Verdana;
+   font-weight: normal;
+   color: #024457;
+}
+ h1 span {
+   color: #167f92;
+}
+     *{
+           box-sizing:border-box
+        }
+        
+        
+        
+    .child{
+            border: 5px solid green;
+            border-radius: 20px;
+            width:1000px;
+            margin-right:20px;
+            
+        }
+        @media (min-width: 768px){
+        .parent{
+            display:flex;
+        }
+        }
+.p3 {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+.clip-wrap {
+   text-align: center;
+   width: 760px;
+   margin: 80px auto;
+}
+ a .clip-polygon:nth-child(1n + 5) {
+   transform: translateY(-50%);
+}
+ .clip-polygon:nth-child(1n + 5):hover {
+   transform: translateY(-50%) scale(1.4);
+}
+ .clip-polygon {
+   position: relative;
+   transition: 0.6s all, 0.3s 0.3s transform;
+   clip-path: polygon(50% 0%, 50% 0%, 100% 50%, 50% 100%, 50% 100%, 0% 50%);
+   opacity: 0.8;
+}
+ .clip-polygon:hover {
+   clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 100% 100%, 0% 100%, 0% 50%);
+   transform: scale(1.4);
+   z-index: 10;
+   box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+   border-radius: 3px;
+   opacity: 1;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1> </h1>
+
+
+
+
+
+<div class="clip-wrap">
+  <img src="https://static.pexels.com/photos/192/wood-landscape-nature-rocks-medium.jpg" width="180" height="180" class="clip-polygon">
+  <img src="https://static.pexels.com/photos/397/italian-landscape-mountains-nature-medium.jpg" width="180" height="180" class="clip-polygon">
+  <img src="https://static.pexels.com/photos/1562/italian-landscape-mountains-nature-medium.jpg" width="180" height="180" class="clip-polygon">
+  <img src="https://static.pexels.com/photos/1242/nature-field-sun-agriculture-medium.jpg" width="180" height="180" class="clip-polygon">
+  <img src="https://static.pexels.com/photos/541/nature-forest-trees-fog-medium.jpg" width="180" height="180" class="clip-polygon">
+  <img src="https://static.pexels.com/photos/1130/snow-landscape-mountains-nature-medium.jpg" width="180" height="180" class="clip-polygon">
+  <img src="https://static.pexels.com/photos/792/wood-landscape-mountains-nature-medium.jpg" width="180" height="180" class="clip-polygon">
+</div>
+
+
+
+
+
+
+
+
+
+
+<h1>The sensors data:<span> last 5</span> values <span>{{gsrt}}</span></h1>
+
+<table class="responstable">
+  
+  <tr>
+    <th>Date and Time</th>
+    <th>N,P,K</th>
+    <th>pH</th>
+    <th>Temp</th>
+    <th>Moisture</th>
+    <th>Humidity</th>
+  </tr>
+  
+    {% for i in range(4) %}
+    <tr>
+    <td>Stan</td>
+    <td>{{nl[i], pl[i], kl[i]}}</td>
+    <td>{{phl[i]}}</td>
+    <td>{{templ[i]}}</td>
+    <td>{{moistl[i]}}</td>
+    <td>{{huml[i]}}</td>
+    </tr>
+    {%endfor%}
+  
+</table>
+<h2>Crop Recommendation&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Fertliser Recommendation</h2>
+<Section class="parent">
+    <Section class="child">
+<img class="crop" src="{{url_for('static', filename=predv[0])}}" align="middle" style="width:500px;height:400px;"/>
+<h1>{{predv[2]}}</h1>
+<p>
+  {{cropeng[predv[4]]}}
+</p>
+<p class="p3">
+    {% if predv[4]==0 %}
+        <p>తెల్ల బియ్యం మొత్తం గోధుమ రంగులోకి మారడం ప్రారంభిస్తుంది. తెల్ల బియ్యం కేవలం బ్రౌన్ రైస్, దాని బయటి ఊక పొరను తొలగించి పాలిష్ చేస్తారు. వరి మొక్కలు నాటిన 120 రోజుల తర్వాత సగటున 3 నుండి 4 అడుగుల ఎత్తు వరకు పెరుగుతాయి. ఈ సమయంలో రైతులు ఆ పొలానికి లేదా పొలానికి బాగా సరిపోయే పద్ధతిని ఉపయోగించి వరి పొలాలకు నీరు పెట్టండి.</p>
+    {% elif predv[4]==1%}
+        <p>మొక్కజొన్న అని కూడా పిలువబడే మొక్కజొన్న, 10,000 సంవత్సరాల క్రితం దక్షిణ మెక్సికోలోని స్థానిక ప్రజలచే మొదటిసారిగా పెంపకం చేయబడిన తృణధాన్యం. మొక్కజొన్న మొక్కల రకం మరియు పెరుగుతున్న కాలంలో వేడిని బట్టి పంటను చేరుకోవడానికి 60 నుండి 100 రోజుల వరకు పడుతుంది.</p>
+    {% elif predv[4]==2%}
+        <p>చిక్‌పీస్‌ను క్రమం తప్పకుండా తినడం వల్ల మీ చెడు కొలెస్ట్రాల్ తగ్గుతుంది. చిక్‌పీ లేదా గార్బాంజో బీన్ ఒక చల్లని-సీజన్ వార్షికం, ఇది కోతకు చేరుకోవడానికి దాదాపు 100 రోజులు పడుతుంది.</p>
+    {% elif predv[4]==3%}
+        <p>కిడ్నీ బీన్స్ ప్రోటీన్ యొక్క అద్భుతమైన మొక్క-ఆధారిత మూలం. ఈ బీన్స్ బరువు తగ్గడానికి, పెద్దప్రేగు ఆరోగ్యాన్ని మరియు రక్తంలో చక్కెర స్థాయిలను నియంత్రించడంలో సహాయపడతాయి. కిడ్నీ బీన్స్ 100 నుండి 140 రోజులలోపు కోతకు సిద్ధంగా ఉంటాయి.</p>
+    {% elif predv[4]==4%}
+        <p>పావురం బఠానీలు చాలా పోషకమైనవి మరియు అవి పొడిగా మారడానికి మరియు వాటి రంగును కోల్పోయే ముందు, వాటి ఆకుపచ్చ దశలో జీర్ణం చేసుకోవడం సులభం. పావురం బఠానీలు 10 నుండి 15 రోజులలో మొలకెత్తుతాయి & 4 నెలల్లో కాయలు కనిపిస్తాయి.</p>
+    {% elif predv[4]==5%}
+        <p>మోత్ బీన్స్‌లో కాల్షియం ఉంటుంది, ఇది బలమైన ఎముకలను నిర్వహించడానికి మరియు బోలు ఎముకల వ్యాధి ప్రమాదాన్ని నివారించడానికి ముఖ్యమైన ఖనిజం. చిమ్మట బీన్స్ పరిపక్వం చెందడానికి 75 నుండి 90 రోజులు పడుతుంది మరియు అవి వర్షాకాలం చివరిలో తరచుగా నాటబడతాయి.</p>
+    {% elif predv[4]==6%}
+        <p>ముంగ్ బీన్స్ లేదా గ్రీన్ గ్రామ్ యొక్క ప్రధాన ఆరోగ్య ప్రయోజనం కొలెస్ట్రాల్ తగ్గించే ఫైబర్ యొక్క గొప్ప మూలం. ముంగ్ బీన్స్ ఒక వెచ్చని-కాలపు పంట మరియు పరిపక్వతకు 90-120 రోజుల మధ్య పడుతుంది.</p>
+    {% elif predv[4]==7%}
+        <p>ఇది భారతదేశం అంతటా పండే ముఖ్యమైన పప్పుధాన్యాల పంటలలో ఒకటి. సాధారణంగా దీనిని 'దాల్' రూపంలో వినియోగిస్తారు. ఇది 'పాపడ్, ఇడ్లీ మరియు దోస'లలో ప్రధాన భాగం. ఇది సుమారు 70-75 రోజుల వ్యవధి & దాని ఉత్పత్తిని తీసుకుంటుంది. దాదాపు 10-12 రోజులు ఉంటుంది.</p>
+    {% elif predv[4]==8%}
+        <p>కాయధాన్యాలలో ఫైబర్, ఫోలేట్ మరియు పొటాషియం పుష్కలంగా ఉంటాయి, ఇవి గుండెకు మరియు రక్తపోటు మరియు కొలెస్ట్రాల్‌ను నిర్వహించడానికి ఒక గొప్ప ఎంపిక. కాయధాన్యాలు కోతకు రావడానికి 80 నుండి 110 రోజులు పడుతుంది.</p>
+    {% elif predv[4]==9%}
+        <p>దానిమ్మ పదానికి అనేక గింజలు కలిగిన యాపిల్ అని అర్ధం. దానిమ్మలు మధ్యప్రాచ్యానికి చెందినవి. అవి బెర్రీ కుటుంబానికి చెందినవి & సూపర్ ఫ్రూట్‌గా వర్గీకరించబడ్డాయి. దానిమ్మ చెట్లు వాటి పండ్లు పూర్తిగా పరిపక్వం చెందడానికి 7 నెలల వరకు పట్టవచ్చు. చెట్టు కూడా రెండు మూడు సంవత్సరాల హృదయపూర్వక పెరుగుదల తర్వాత మాత్రమే ఫలాలను ఇస్తుంది.</p>
+    {% elif predv[4]==10%}
+        <p>ప్రపంచవ్యాప్తంగా అరటిపండు ఉత్పత్తికి దాదాపు 5.6 మిలియన్ హెక్టార్ల భూమిని ఉపయోగిస్తున్నారు. ఉష్ణోగ్రత, వైవిధ్యం, తేమ మరియు సంస్కృతి పద్ధతులపై ఆధారపడి పుష్పించే తర్వాత పండ్లు పూర్తి పరిమాణానికి చేరుకోవడానికి అరటి సాధారణంగా నాలుగు నుండి ఆరు నెలల సమయం పడుతుంది.</p>
+    {% elif predv[4]==11%}
+        <p>మామిడిలో విటమిన్ సి కూడా పుష్కలంగా ఉంటుంది, ఇది రక్త నాళాలు మరియు ఆరోగ్యకరమైన కొల్లాజెన్‌ను ఏర్పరచడంలో ముఖ్యమైనది, అలాగే మీరు నయం చేయడంలో సహాయపడుతుంది. మామిడి చెట్టు ఫలాలను ఇవ్వడానికి 5-8 సంవత్సరాలు అవసరం; ఒక నర్సరీ నారు దాదాపు నాలుగు సంవత్సరాలలో ఫలాలను ఇస్తుంది. సంవత్సరాలు. మామిడి పండు చెట్టు పుష్పించిన తర్వాత పండడానికి మూడు నుండి ఐదు నెలల సమయం పడుతుంది.</p>
+    {% elif predv[4]==12%}
+        <p>ఒక ద్రాక్ష ఇప్పటికీ బొటానికల్ పరంగా ఒక రకమైన బెర్రీగా నిర్వచించబడింది. దీనర్థం ప్రతి పండు ద్రాక్షపండుపై ఒకే పువ్వు నుండి వస్తుంది. ద్రాక్ష మొక్క నాటిన 10-15 రోజుల తర్వాత పెరగడం ప్రారంభమవుతుంది.</p>
+    {% elif predv[4]==13%}
+        <p>ఆగస్టు 3 జాతీయ పుచ్చకాయ దినోత్సవం, & వేసవి అంతా, పెరటి ప్రధాన స్థావరం పానీయాలకు జోడించబడుతుంది మరియు దేశవ్యాప్తంగా బార్బెక్యూలలో డెజర్ట్‌గా వడ్డిస్తారు. పుచ్చకాయలు పూర్తి-పరిమాణ పుచ్చకాయను పెంచడానికి సీడ్ విత్తడం నుండి 80-90 రోజులు అవసరం. కొన్ని చిన్న-పరిమాణాలు పుచ్చకాయలు (షుగర్ బేబీ వంటివి) దాదాపు 70 రోజులలో పరిపక్వతకు చేరుకుంటాయి.</p>
+    {% elif predv[4]==14%}
+        <p>పుచ్చకాయలో ఫైబర్ మరియు వాటర్ కంటెంట్ అధికంగా ఉంటుంది, ఇది అజీర్ణం, మలబద్ధకం మరియు ఇతర జీర్ణవ్యవస్థ సమస్యలతో బాధపడేవారికి ఇది గొప్ప సహజ వైద్యం చేస్తుంది. పువ్వు పరాగసంపర్కం జరిగిన తర్వాత సీతాఫలాలు పక్వానికి రావడానికి 35 నుండి 45 రోజులు పడుతుంది.</p>
+    {% elif predv[4]==15%}
+        <p>యాపిల్‌లు 25'% గాలి. యాపిల్స్ నీటిలో తేలియాడతాయి ఎందుకంటే వాటి పరిమాణంలో 25'%' నిజానికి గాలి. యాపిల్స్ నీటి కంటే తక్కువ సాంద్రత కలిగి ఉంటాయి, వాటిని ఆపిల్ బాబింగ్‌కు సరైన ఫలంగా మారుస్తాయి. ప్రామాణికమైన లేదా పూర్తి-పరిమాణ ఆపిల్ చెట్లు 30 అడుగుల పొడవు వరకు పెరుగుతాయి మరియు వాటి మొదటి ఫలాలను ఇవ్వడానికి ఆరు సంవత్సరాలు పట్టవచ్చు.</p>
+    {% elif predv[4]==16%}
+        <p>ఆరెంజ్ ప్రపంచంలోనే అతిపెద్ద సిట్రస్ పండు. ఆరెంజ్ జ్యూస్ అమెరికాలో అత్యంత ప్రజాదరణ పొందిన పండ్ల రసం. ఒక నారింజ చెట్టు ఫలాలను ఉత్పత్తి చేయడానికి 3-5 సంవత్సరాలు పడుతుంది, ఇది చెట్టును కొనుగోలు చేసేటప్పుడు ఎంత పాతది. చివరకు పండ్లను ఉత్పత్తి చేయడం ప్రారంభిస్తుంది, అవి పక్వానికి 7 నుండి 8 నెలలు పడుతుంది.</p>
+    {% elif predv[4]==16%}
+        <p>బొటానికల్‌గా బొప్పాయి ఒక బెర్రీ. ఇది చెట్టు నుండి పెరిగినట్లు కనిపించవచ్చు, కానీ బొప్పాయి నిజానికి ఒక మూలికల పండు. బొప్పాయిని విత్తనం నుండి పండు వరకు పెరగడానికి 6-12 నెలల సమయం పడుతుంది.</p>
+    {% elif predv[4]==16%}
+        <p>సగటున ఒక కొబ్బరి చెట్టు ప్రతి సంవత్సరం 30 పండ్లను ఉత్పత్తి చేస్తుంది, కానీ ఒక చెట్టు సరైన వాతావరణ పరిస్థితులతో సంవత్సరానికి 75 కొబ్బరికాయలను ఉత్పత్తి చేస్తుంది, ఇది చాలా అరుదు. ప్రతి సంవత్సరం సుమారు 61 మిలియన్ టన్నుల కొబ్బరికాయలు ఉత్పత్తి అవుతాయి. కొబ్బరి చెట్టు ఒక్కదాని నుండి పెరుగుతుంది. విత్తనం, ఇది మొత్తం కొబ్బరి, ఫలాలను ఇవ్వడానికి 3 మరియు 8 సంవత్సరాల మధ్య పడుతుంది మరియు 60 మరియు 100 సంవత్సరాల మధ్య జీవిస్తుంది.</p>
+    {% elif predv[4]==16%}
+        <p>భారతదేశం యొక్క అత్యంత ముఖ్యమైన ఫైబర్ మరియు నగదు పంటలలో పత్తి ఒకటి మరియు దేశంలోని పారిశ్రామిక మరియు వ్యవసాయ ఆర్థిక వ్యవస్థలో ప్రధాన పాత్ర పోషిస్తుంది. ఇది పత్తి వస్త్ర పరిశ్రమకు ప్రాథమిక ముడిసరుకు (కాటన్ ఫైబర్) అందిస్తుంది. పత్తి పూర్తిగా పరిపక్వం చెందింది మరియు నాటిన సుమారు 160 రోజుల తర్వాత కోతకు సిద్ధంగా ఉంది. కాయలు తెరిచిన తర్వాత, రైతులు పత్తి మొక్కలను కోతకు సిద్ధం చేయవచ్చు.</p>
+    {% elif predv[4]==16%}
+        <p>జనపనార దాని బహుముఖ ప్రజ్ఞ కారణంగా పత్తి తర్వాత రెండవ అత్యంత ముఖ్యమైన కూరగాయల ఫైబర్. జనపనారను ప్రధానంగా ముడి పత్తి బేల్స్‌ను చుట్టడానికి మరియు బస్తాలు మరియు ముతక గుడ్డను తయారు చేయడానికి గుడ్డను తయారు చేయడానికి ఉపయోగిస్తారు. జనపనారను పండించడానికి, రైతులు సాగు చేసిన నేలపై విత్తనాలను చల్లుతారు. మొక్కలు దాదాపు 15-20 సెం.మీ ఎత్తు ఉన్నప్పుడు, అవి పలుచబడి ఉంటాయి. నాటిన 4 నెలల తర్వాత, కోత ప్రారంభమవుతుంది.</p>
+    {% elif predv[4]==16%}
+        <p>కాఫీని అధిక పరిమాణంలో వినియోగిస్తారు, ఇది ప్రపంచంలోని 2వ అతిపెద్ద వర్తకం వస్తువు, ఇది కేవలం ముడి చమురుతో మాత్రమే అధిగమించబడింది. రకాన్ని బట్టి, కొత్తగా నాటిన కాఫీ చెట్లు ఫలించటానికి దాదాపు 3 నుండి 4 సంవత్సరాలు పడుతుంది.</p>
+    {% endif %}
+</p>
+    </Section>
+    <section class="child">
+
+   <img class="fert" src="{{url_for('static', filename=predv[1])}}" align="middle"style="width:400px;height:400px;" />
+   <h1>{{predv[3]}}</h1>
+   <p class="p3"></p>
+   
+    </Section>
+    </section>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Rain Fall Prediction</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Set a background color */
+body {
+  background-color: #ffd86e;
+  font-family: Helvetica, sans-serif;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.container {
+  padding: 10px 50px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+/* The circles on the timeline */
+.container::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -17px;
+  background-color: #61D4E8;
+  border: 4px solid #2DA1E7;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Place the container to the left */
+.left {
+  left: 0;
+}
+
+/* Place the container to the right */
+.right {
+  left: 50%;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent white;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+  left: -16px;
+}
+
+/* The actual content */
+.content {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+ }
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+/* Place the timelime to the left */
+  .timeline::after {
+    left: 31px;
+  }
+
+/* Full-width containers */
+  .container {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+
+/* Make sure that all arrows are pointing leftwards */
+  .container::before {
+    left: 60px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+  }
+
+/* Make sure all circles are at the same spot */
+  .left::after, .right::after {
+    left: 15px;
+  }
+
+/* Make all right containers behave like the left ones */
+  .right {
+    left: 0%;
+  }
+}
+.chart {
+     width: 100%;
+     min-height: 450px;
+}
+ .row {
+     margin: 0 !important;
+}
+
+</style>
+</head>
+
+<body>
+<div class="content">
+  <h1><center>Prediction of rainfall in three regions</center></h1>
+</div>
+<div class="timeline">
+  <div class="container left">
+    <p>
+      <i class="fa fa-code-fork" aria-hidden="true"></i>
+    <div class="content">
+      <h2>Telangana prediction</h2>
+      <div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <hr />
+  </div>
+  <div class="col-md-6">    
+    <canvas id="line-chart" class="chart" style="position: relative; height:80vh; width:40vw"></canvas>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+  <div class="container right">
+    <div class="content">
+      <h2>Telangana readings</h2>
+      
+    </div>
+  </div>
+    <div class="container left">
+    <div class="content">
+      <h2>Rayalaseema prediction</h2>
+      <div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <hr />
+  </div>
+  <div class="col-md-6">    
+    <canvas id="line-chart2" class="chart" style="position: relative; height:80vh; width:40vw"></canvas>
+  </div>
+</div>
+    </div>
+  </div>
+    <div class="container right">
+    <div class="content">
+      <h2>Rayalaseema readings</h2>
+      <p>At this point you are ready to take the in-person training and implement Puppet in your own environment.<p><i>Coming soon!</i></p></p>
+    </div>
+  </div>
+  <div class="container left">
+    <div class="content">
+      <h2>Coastal Andhra Pradesh prediction</h2>
+      <div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <hr />
+  </div>
+  <div class="col-md-6">    
+    <canvas id="line-chart3" class="chart" style="position: relative; height:80vh; width:40vw"></canvas>
+  </div>
+</div>
+    </div>
+  </div>
+    <div class="container right">
+    <div class="content">
+      <h2>Coastal Andhra Pradesh readings</h2>
+      <p>The journey never ends. <a href="http://learn.puppet.com">Here are some resources</a> to keep you on your learning path.</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: ['2000 JAN','2000 FEB','2000 MAR','2000 APR','2000 MAY','2000 JUN','2000 JUL','2000 AUG','2000 SEP','2000 OCT','2000 NOV','2000 DEC','2001 JAN','2001 FEB','2001 MAR','2001 APR','2001 MAY','2001 JUN','2001 JUL','2001 AUG','2001 SEP','2001 OCT','2001 NOV','2001 DEC','2002 JAN','2002 FEB','2002 MAR','2002 APR','2002 MAY','2002 JUN','2002 JUL','2002 AUG','2002 SEP','2002 OCT','2002 NOV','2002 DEC','2003 JAN','2003 FEB','2003 MAR','2003 APR','2003 MAY','2003 JUN','2003 JUL','2003 AUG','2003 SEP','2003 OCT','2003 NOV','2003 DEC','2004 JAN','2004 FEB','2004 MAR','2004 APR','2004 MAY','2004 JUN','2004 JUL','2004 AUG','2004 SEP','2004 OCT','2004 NOV','2004 DEC','2005 JAN','2005 FEB','2005 MAR','2005 APR','2005 MAY','2005 JUN','2005 JUL','2005 AUG','2005 SEP','2005 OCT','2005 NOV','2005 DEC','2006 JAN','2006 FEB','2006 MAR','2006 APR','2006 MAY','2006 JUN','2006 JUL','2006 AUG','2006 SEP','2006 OCT','2006 NOV','2006 DEC','2007 JAN','2007 FEB','2007 MAR','2007 APR','2007 MAY','2007 JUN','2007 JUL','2007 AUG','2007 SEP','2007 OCT','2007 NOV','2007 DEC','2008 JAN','2008 FEB','2008 MAR','2008 APR','2008 MAY','2008 JUN','2008 JUL','2008 AUG','2008 SEP','2008 OCT','2008 NOV','2008 DEC','2009 JAN','2009 FEB','2009 MAR','2009 APR','2009 MAY','2009 JUN','2009 JUL','2009 AUG','2009 SEP','2009 OCT','2009 NOV','2009 DEC','2010 JAN','2010 FEB','2010 MAR','2010 APR','2010 MAY','2010 JUN','2010 JUL','2010 AUG','2010 SEP','2010 OCT','2010 NOV','2010 DEC','2011 JAN','2011 FEB','2011 MAR','2011 APR','2011 MAY','2011 JUN','2011 JUL','2011 AUG','2011 SEP','2011 OCT','2011 NOV','2011 DEC','2012 JAN','2012 FEB','2012 MAR','2012 APR','2012 MAY','2012 JUN','2012 JUL','2012 AUG','2012 SEP','2012 OCT','2012 NOV','2012 DEC','2013 JAN','2013 FEB','2013 MAR','2013 APR','2013 MAY','2013 JUN','2013 JUL','2013 AUG','2013 SEP','2013 OCT','2013 NOV','2013 DEC','2014 JAN','2014 FEB','2014 MAR','2014 APR','2014 MAY','2014 JUN','2014 JUL','2014 AUG','2014 SEP','2014 OCT','2014 NOV','2014 DEC','2015 JAN','2015 FEB','2015 MAR','2015 APR','2015 MAY','2015 JUN','2015 JUL','2015 AUG','2015 SEP','2015 OCT','2015 NOV','2015 DEC','2016 JAN','2016 FEB','2016 MAR','2016 APR','2016 MAY','2016 JUN','2016 JUL','2016 AUG','2016 SEP','2016 OCT','2016 NOV','2016 DEC','2017 JAN','2017 FEB','2017 MAR','2017 APR','2017 MAY','2017 JUN','2017 JUL','2017 AUG','2017 SEP','2017 OCT','2017 NOV','2017 DEC'],
+    datasets: [{ 
+        data: [0.6,16.8,1.0,16.3,48.8,253.2,220.9,420.5,70.7,20.2,6.4,2.5,8.5,0.0,21.5,37.3,7.5,183.9,123.8,266.8,119.9,135.6,17.4,0.0,18.8,10.1,7.6,7.7,32.0,143.2,91.7,321.7,52.4,76.2,3.9,0.0,0.0,10.7,21.9,14.0,7.9,112.6,312.2,266.5,103.2,101.7,7.3,5.3,34.4,17.9,9.3,25.9,34.6,64.6,216.7,117.7,110.1,30.6,5.3,0.0,43.4,14.1,14.6,23.8,19.7,115.1,400.3,126.9,246.3,136.1,3.9,18.8,0.0,0.0,42.7,38.6,46.1,104.8,169.5,308.2,280.2,28.1,34.7,0.0,0.0,0.0,0.1,0.1,9.2,176.6,134.6,206.6,262.3,40.8,13.0,0.0,0.2,18.6,108.6,15.7,4.9,132.9,183.4,391.8,146.7,24.2,7.5,0.8,0.0,0.0,2.1,4.5,13.1,85.8,118.4,192.3,149.7,69.5,29.6,1.2,10.3,5.3,1.5,5.6,24.9,127.0,395.5,308.1,249.8,98.7,40.5,9.3,0.0,11.9,2.6,25.6,9.3,83.9,268.2,225.9,107.6,13.9,4.2,0.0,6.7,0.0,0.2,14.0,8.4,124.4,300.3,229.9,202.4,83.6,38.7,0.0,2.4,29.0,0.2,24.4,8.5,213.4,453.8,230.6,161.4,205.9,16.4,2.7,0.2,2.9,58.3,10.3,73.3,62.3,146.0,205.2,146.8,29.6,10.8,0.7,17.5,0.0,43.0,65.7,23.3,266.9,104.4,160.5,158.3,15.6,0.3,1.7,1.2,0.2,11.5,4.3,55.1,194.0,235.8,133.7,336.3,70.4,0.5,0.4,0.0,0.0,8.7,3.2,22.4,202.2,143.2,204.2,115.3,114.6,1.9,0.0],
+        borderColor: "#3e95cd",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Predicted data'
+          }
+        }]
+      }
+  }
+});
+
+
+new Chart(document.getElementById("line-chart2"), {
+  type: 'line',
+  data: {
+    labels: ['2000 JAN','2000 FEB','2000 MAR','2000 APR','2000 MAY','2000 JUN','2000 JUL','2000 AUG','2000 SEP','2000 OCT','2000 NOV','2000 DEC','2001 JAN','2001 FEB','2001 MAR','2001 APR','2001 MAY','2001 JUN','2001 JUL','2001 AUG','2001 SEP','2001 OCT','2001 NOV','2001 DEC','2002 JAN','2002 FEB','2002 MAR','2002 APR','2002 MAY','2002 JUN','2002 JUL','2002 AUG','2002 SEP','2002 OCT','2002 NOV','2002 DEC','2003 JAN','2003 FEB','2003 MAR','2003 APR','2003 MAY','2003 JUN','2003 JUL','2003 AUG','2003 SEP','2003 OCT','2003 NOV','2003 DEC','2004 JAN','2004 FEB','2004 MAR','2004 APR','2004 MAY','2004 JUN','2004 JUL','2004 AUG','2004 SEP','2004 OCT','2004 NOV','2004 DEC','2005 JAN','2005 FEB','2005 MAR','2005 APR','2005 MAY','2005 JUN','2005 JUL','2005 AUG','2005 SEP','2005 OCT','2005 NOV','2005 DEC','2006 JAN','2006 FEB','2006 MAR','2006 APR','2006 MAY','2006 JUN','2006 JUL','2006 AUG','2006 SEP','2006 OCT','2006 NOV','2006 DEC','2007 JAN','2007 FEB','2007 MAR','2007 APR','2007 MAY','2007 JUN','2007 JUL','2007 AUG','2007 SEP','2007 OCT','2007 NOV','2007 DEC','2008 JAN','2008 FEB','2008 MAR','2008 APR','2008 MAY','2008 JUN','2008 JUL','2008 AUG','2008 SEP','2008 OCT','2008 NOV','2008 DEC','2009 JAN','2009 FEB','2009 MAR','2009 APR','2009 MAY','2009 JUN','2009 JUL','2009 AUG','2009 SEP','2009 OCT','2009 NOV','2009 DEC','2010 JAN','2010 FEB','2010 MAR','2010 APR','2010 MAY','2010 JUN','2010 JUL','2010 AUG','2010 SEP','2010 OCT','2010 NOV','2010 DEC','2011 JAN','2011 FEB','2011 MAR','2011 APR','2011 MAY','2011 JUN','2011 JUL','2011 AUG','2011 SEP','2011 OCT','2011 NOV','2011 DEC','2012 JAN','2012 FEB','2012 MAR','2012 APR','2012 MAY','2012 JUN','2012 JUL','2012 AUG','2012 SEP','2012 OCT','2012 NOV','2012 DEC','2013 JAN','2013 FEB','2013 MAR','2013 APR','2013 MAY','2013 JUN','2013 JUL','2013 AUG','2013 SEP','2013 OCT','2013 NOV','2013 DEC','2014 JAN','2014 FEB','2014 MAR','2014 APR','2014 MAY','2014 JUN','2014 JUL','2014 AUG','2014 SEP','2014 OCT','2014 NOV','2014 DEC','2015 JAN','2015 FEB','2015 MAR','2015 APR','2015 MAY','2015 JUN','2015 JUL','2015 AUG','2015 SEP','2015 OCT','2015 NOV','2015 DEC','2016 JAN','2016 FEB','2016 MAR','2016 APR','2016 MAY','2016 JUN','2016 JUL','2016 AUG','2016 SEP','2016 OCT','2016 NOV','2016 DEC','2017 JAN','2017 FEB','2017 MAR','2017 APR','2017 MAY','2017 JUN','2017 JUL','2017 AUG','2017 SEP','2017 OCT','2017 NOV','2017 DEC'],
+    datasets: [{ 
+        data: [0.6,16.8,1.0,16.3,48.8,253.2,220.9,420.5,70.7,20.2,6.4,2.5,8.5,0.0,21.5,37.3,7.5,183.9,123.8,266.8,119.9,135.6,17.4,0.0,18.8,10.1,7.6,7.7,32.0,143.2,91.7,321.7,52.4,76.2,3.9,0.0,0.0,10.7,21.9,14.0,7.9,112.6,312.2,266.5,103.2,101.7,7.3,5.3,34.4,17.9,9.3,25.9,34.6,64.6,216.7,117.7,110.1,30.6,5.3,0.0,43.4,14.1,14.6,23.8,19.7,115.1,400.3,126.9,246.3,136.1,3.9,18.8,0.0,0.0,42.7,38.6,46.1,104.8,169.5,308.2,280.2,28.1,34.7,0.0,0.0,0.0,0.1,0.1,9.2,176.6,134.6,206.6,262.3,40.8,13.0,0.0,0.2,18.6,108.6,15.7,4.9,132.9,183.4,391.8,146.7,24.2,7.5,0.8,0.0,0.0,2.1,4.5,13.1,85.8,118.4,192.3,149.7,69.5,29.6,1.2,10.3,5.3,1.5,5.6,24.9,127.0,395.5,308.1,249.8,98.7,40.5,9.3,0.0,11.9,2.6,25.6,9.3,83.9,268.2,225.9,107.6,13.9,4.2,0.0,6.7,0.0,0.2,14.0,8.4,124.4,300.3,229.9,202.4,83.6,38.7,0.0,2.4,29.0,0.2,24.4,8.5,213.4,453.8,230.6,161.4,205.9,16.4,2.7,0.2,2.9,58.3,10.3,73.3,62.3,146.0,205.2,146.8,29.6,10.8,0.7,17.5,0.0,43.0,65.7,23.3,266.9,104.4,160.5,158.3,15.6,0.3,1.7,1.2,0.2,11.5,4.3,55.1,194.0,235.8,133.7,336.3,70.4,0.5,0.4,0.0,0.0,8.7,3.2,22.4,202.2,143.2,204.2,115.3,114.6,1.9,0.0],
+        borderColor: "#3e95cd",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Predicted data'
+          }
+        }]
+      }
+  }
+});
+
+
+new Chart(document.getElementById("line-chart3"), {
+  type: 'line',
+  data: {
+    labels: ['2000 JAN','2000 FEB','2000 MAR','2000 APR','2000 MAY','2000 JUN','2000 JUL','2000 AUG','2000 SEP','2000 OCT','2000 NOV','2000 DEC','2001 JAN','2001 FEB','2001 MAR','2001 APR','2001 MAY','2001 JUN','2001 JUL','2001 AUG','2001 SEP','2001 OCT','2001 NOV','2001 DEC','2002 JAN','2002 FEB','2002 MAR','2002 APR','2002 MAY','2002 JUN','2002 JUL','2002 AUG','2002 SEP','2002 OCT','2002 NOV','2002 DEC','2003 JAN','2003 FEB','2003 MAR','2003 APR','2003 MAY','2003 JUN','2003 JUL','2003 AUG','2003 SEP','2003 OCT','2003 NOV','2003 DEC','2004 JAN','2004 FEB','2004 MAR','2004 APR','2004 MAY','2004 JUN','2004 JUL','2004 AUG','2004 SEP','2004 OCT','2004 NOV','2004 DEC','2005 JAN','2005 FEB','2005 MAR','2005 APR','2005 MAY','2005 JUN','2005 JUL','2005 AUG','2005 SEP','2005 OCT','2005 NOV','2005 DEC','2006 JAN','2006 FEB','2006 MAR','2006 APR','2006 MAY','2006 JUN','2006 JUL','2006 AUG','2006 SEP','2006 OCT','2006 NOV','2006 DEC','2007 JAN','2007 FEB','2007 MAR','2007 APR','2007 MAY','2007 JUN','2007 JUL','2007 AUG','2007 SEP','2007 OCT','2007 NOV','2007 DEC','2008 JAN','2008 FEB','2008 MAR','2008 APR','2008 MAY','2008 JUN','2008 JUL','2008 AUG','2008 SEP','2008 OCT','2008 NOV','2008 DEC','2009 JAN','2009 FEB','2009 MAR','2009 APR','2009 MAY','2009 JUN','2009 JUL','2009 AUG','2009 SEP','2009 OCT','2009 NOV','2009 DEC','2010 JAN','2010 FEB','2010 MAR','2010 APR','2010 MAY','2010 JUN','2010 JUL','2010 AUG','2010 SEP','2010 OCT','2010 NOV','2010 DEC','2011 JAN','2011 FEB','2011 MAR','2011 APR','2011 MAY','2011 JUN','2011 JUL','2011 AUG','2011 SEP','2011 OCT','2011 NOV','2011 DEC','2012 JAN','2012 FEB','2012 MAR','2012 APR','2012 MAY','2012 JUN','2012 JUL','2012 AUG','2012 SEP','2012 OCT','2012 NOV','2012 DEC','2013 JAN','2013 FEB','2013 MAR','2013 APR','2013 MAY','2013 JUN','2013 JUL','2013 AUG','2013 SEP','2013 OCT','2013 NOV','2013 DEC','2014 JAN','2014 FEB','2014 MAR','2014 APR','2014 MAY','2014 JUN','2014 JUL','2014 AUG','2014 SEP','2014 OCT','2014 NOV','2014 DEC','2015 JAN','2015 FEB','2015 MAR','2015 APR','2015 MAY','2015 JUN','2015 JUL','2015 AUG','2015 SEP','2015 OCT','2015 NOV','2015 DEC','2016 JAN','2016 FEB','2016 MAR','2016 APR','2016 MAY','2016 JUN','2016 JUL','2016 AUG','2016 SEP','2016 OCT','2016 NOV','2016 DEC','2017 JAN','2017 FEB','2017 MAR','2017 APR','2017 MAY','2017 JUN','2017 JUL','2017 AUG','2017 SEP','2017 OCT','2017 NOV','2017 DEC'],
+    datasets: [{ 
+        data: [0.6,16.8,1.0,16.3,48.8,253.2,220.9,420.5,70.7,20.2,6.4,2.5,8.5,0.0,21.5,37.3,7.5,183.9,123.8,266.8,119.9,135.6,17.4,0.0,18.8,10.1,7.6,7.7,32.0,143.2,91.7,321.7,52.4,76.2,3.9,0.0,0.0,10.7,21.9,14.0,7.9,112.6,312.2,266.5,103.2,101.7,7.3,5.3,34.4,17.9,9.3,25.9,34.6,64.6,216.7,117.7,110.1,30.6,5.3,0.0,43.4,14.1,14.6,23.8,19.7,115.1,400.3,126.9,246.3,136.1,3.9,18.8,0.0,0.0,42.7,38.6,46.1,104.8,169.5,308.2,280.2,28.1,34.7,0.0,0.0,0.0,0.1,0.1,9.2,176.6,134.6,206.6,262.3,40.8,13.0,0.0,0.2,18.6,108.6,15.7,4.9,132.9,183.4,391.8,146.7,24.2,7.5,0.8,0.0,0.0,2.1,4.5,13.1,85.8,118.4,192.3,149.7,69.5,29.6,1.2,10.3,5.3,1.5,5.6,24.9,127.0,395.5,308.1,249.8,98.7,40.5,9.3,0.0,11.9,2.6,25.6,9.3,83.9,268.2,225.9,107.6,13.9,4.2,0.0,6.7,0.0,0.2,14.0,8.4,124.4,300.3,229.9,202.4,83.6,38.7,0.0,2.4,29.0,0.2,24.4,8.5,213.4,453.8,230.6,161.4,205.9,16.4,2.7,0.2,2.9,58.3,10.3,73.3,62.3,146.0,205.2,146.8,29.6,10.8,0.7,17.5,0.0,43.0,65.7,23.3,266.9,104.4,160.5,158.3,15.6,0.3,1.7,1.2,0.2,11.5,4.3,55.1,194.0,235.8,133.7,336.3,70.4,0.5,0.4,0.0,0.0,8.7,3.2,22.4,202.2,143.2,204.2,115.3,114.6,1.9,0.0],
+        borderColor: "#3e95cd",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Predicted data'
+          }
+        }]
+      }
+  }
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
