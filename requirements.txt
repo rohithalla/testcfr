@@ -6,4 +6,4 @@ firebase
 python_jwt
 gcloud
 sseclient
-jwcrypto
+pycryptodome
