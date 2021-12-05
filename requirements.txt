@@ -1,6 +1,8 @@
 flask
 werkzeug==1.0.0
 gunicorn==19.9.0
+sklearn
+numpy
 
 anyio==3.4.0
 astroid==2.6.5
