@@ -7,4 +7,4 @@ python_jwt
 gcloud
 sseclient
 pycryptodome==3.11.0
-requests_toolbet==0.9.1
+requests_toolbet
